@@ -1,0 +1,295 @@
+{% extends session.coreShareViewsF ~ "layout.twig" %}
+{% block styles %}
+    <link rel="stylesheet" href="{{base_url()}}/css/plugins/datapicker/datepicker3.css">
+    <link href="{{base_url()}}/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
+    <style></style>
+{% endblock styles %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-10">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        <i class="fa fa-user m-r-sm"></i>
+                        {{LexiqueGetString('cash-withdrawal')}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" action="{{path_for('operation.cashWithdrawal')}}" method="post" name="cashWithdrawal" id="cashWithdrawal" enctype="multipart/form-data">
+                        {{ getCsrfInput() }}
+                        <div class="form-group">
+                            {{flashMsg()}}
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="col-lg-12 m-b-sm">
+                                        <label class="col-lg-12 mb-10" for="LD_trans_partner">{{LexiqueGetString('partner')}}<code>*</code>
+                                        </label>
+                                        <div class="col-lg-12">
+                                            <select id="LD_trans_partner" name="LD_trans_partner" class="form-control b-r-sm" required data-msg-required="{{LexiqueGetString('required-fields')}}">
+                                                {{selectedList(partners,Model.partner,'partner')|raw}}
+                                            </select>
+                                            <span class="help-block m-b-none text-danger">{{modelErrors.LD_trans_partner}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 m-b-sm">
+                                        <label class="col-lg-12 m-b-10" for="tb_trans_account">{{LexiqueGetString('n-account')}}<code>*</code>
+                                        </label>
+                                        <div class="col-lg-12">
+                                            <input id="tb_trans_account" name="tb_trans_account" class="form-control b-r-sm" type="text" maxlength="20" placeholder="{{LexiqueGetString('n-account')}} *" value="{{Model.accountNum}}" required data-msg-required="{{LexiqueGetString('required-fields')}}"/>
+                                            <span class="help-block m-b-none text-danger">{{modelErrors.tb_trans_account}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button class="ladda-button btn btn-md btn-primary g-bg-primary-opacity-0_8--hover g-mr-10 pull-right" data-style="expand-right" id="btnSearchClient" type="button">
+                                            {{LexiqueGetString('identify-the-customer')}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <fieldset>
+                                    <legend class="form-label">{{LexiqueGetString('account-holder')}}</legend>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <label class="col-lg-12 form-label m-b-10" for="">{{LexiqueGetString('customer-name')}}</label>
+                                            <input class="col-lg-12 form-control b-r-sm" id="account-holder" readonly/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <label class="col-lg-12 form-label m-b-10" for="">{{LexiqueGetString('n-account')}}</label>
+                                            <input class="col-lg-12 form-control b-r-sm" id="account-number" readonly/>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <fieldset disabled id="opCustomer">
+                                    <legend class="form-label">{{LexiqueGetString('customer-of-the-operation')}}</legend>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label class="col-lg-12 m-b-10" for="tb_trans_amount">{{LexiqueGetString('amount')}}<code>*</code>
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <input id="tb_trans_amount" name="tb_trans_amount" class="form-control b-r-sm" type="number" placeholder="{{LexiqueGetString('amount')}} *" value="{{Model.amount}}" required data-msg-required="{{LexiqueGetString('required-fields')}}"/>
+                                                <span class="help-block m-b-none text-danger">{{modelErrors.tb_trans_amount}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-lg-12 form-label m-b-10" for="tb_trans_customer">{{LexiqueGetString('customer-name')}}</label>
+                                            <div class="col-lg-12">
+                                                <input id="tb_trans_customer" name="tb_trans_customer" class="form-control b-r-sm" type="text" maxlength="50" placeholder="{{LexiqueGetString('customer-name')}}" value="{{Model.customer}}"/>
+                                                <span class="help-block m-b-none text-danger">{{modelErrors.tb_trans_customer}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label class="col-lg-12 m-b-10" for="ld_trans_doc_type">{{LexiqueGetString('type-of-document')}}<code>*</code>
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <select id="ld_trans_doc_type" name="ld_trans_doc_type" class="form-control b-r-sm" required data-msg-required="{{LexiqueGetString('required-fields')}}">
+                                                    {{selectedList(typePieces,Model.tPiece,'type-of-document')|raw}}
+                                                </select>
+                                                <span class="help-block m-b-none text-danger">{{modelErrors.ld_trans_doc_type}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-lg-12 form-label m-b-10" for="tb_trans_doc_num">{{LexiqueGetString('n-document')}}</label>
+                                            <div class="col-lg-12">
+                                                <input id="tb_trans_doc_num" name="tb_trans_doc_num" class="form-control b-r-sm" type="text" maxlength="20" placeholder="{{LexiqueGetString('n-document')}}" value="{{Model.docNum}}">
+                                                <span class="help-block m-b-none text-danger">{{modelErrors.tb_trans_doc_num}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label class="col-lg-12 m-b-10" for="tb_trans_doc_place">{{LexiqueGetString('issue-place')}}</label>
+                                            <div class="col-lg-12">
+                                                <input id="tb_trans_doc_place" name="tb_trans_doc_place" class="form-control b-r-sm" type="text" maxlength="30" placeholder="{{LexiqueGetString('issue-place')}}" value="{{Model.issuePlace}}"/>
+                                                <span class="help-block m-b-none text-danger">{{modelErrors.tb_trans_doc_place}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-lg-12 m-b-10" for="tb_trans_doc_date">{{LexiqueGetString('issue-date')}}<code>*</code>
+                                            </label>
+                                            <div class="col-lg-12" id="data_1">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                    <input id="tb_trans_doc_date" name="tb_trans_doc_date" class="form-control b-r-sm" type="text" placeholder="{{LexiqueGetString('issue-date')}} *" value="{{Model.issueDate}}" required data-msg-required="{{LexiqueGetString('required-fields')}}"/>
+                                                </div>
+                                                <span class="help-block m-b-none text-danger">{{modelErrors.tb_trans_doc_date}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <hr class="hr-line-dashed">
+                            </div>
+                            <div class="col-lg-12">
+                                <label class="text-right m-l-lg">
+                                    <code>*</code>
+                                    <small>{{LexiqueGetString('required-fields')}}</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-6 col-lg-12 mb-20">
+                                {{goBack('home')}}
+                            </div>
+                            <div class="col-lg-6 col-lg-12">
+                                <button class="btn btn-md btn-primary g-bg-primary-opacity-0_8--hover g-mr-10 pull-right" disabled id="sendWithdraw" type="submit">
+                                    {{LexiqueGetString('save')}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}
+{% block scripts %}
+    <script src="{{ base_url() }}/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="{{ base_url() }}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="{{ base_url() }}/js/plugins/ladda/spin.min.js"></script>
+    <script src="{{ base_url() }}/js/plugins/ladda/ladda.min.js"></script>
+    <script src="{{ base_url() }}/js/plugins/ladda/ladda.jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#data_1 .input-group.date').datepicker({
+                todayHighlight: true,
+                format: 'yyyy-mm-dd',
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+            $('#cashWithdrawal').validate({
+                rules: {
+                    LD_trans_partner: {
+                        required: true
+                    },
+                    tb_trans_account: {
+                        required: true,
+                        maxlength: 20
+                    },
+                    tb_trans_customer: {
+                        required: true,
+                        maxlength: 50
+                    },
+                    tb_trans_amount: {
+                        required: true
+                    },
+                    ld_trans_doc_type: {
+                        required: true,
+                        maxlength: 10
+                    },
+                    tb_trans_doc_num: {
+                        required: true,
+                        maxlength: 20
+                    },
+                    tb_trans_doc_place: {
+                        maxlength: 30
+                    },
+                    tb_trans_doc_date: {
+                        required: true
+                    }
+                },
+                messages: {
+                    LD_trans_partner: {
+                        required: "{{ LexiqueGetString('this-field-is-required') }}"
+                    },
+                    tb_trans_account: {
+                        required: "{{ LexiqueGetString('this-field-is-required') }}",
+                        maxlength: jQuery.validator.format("{{ LexiqueGetString('this-field-accept-maximum') }}")
+                    },
+                    tb_trans_customer: {
+                        required: "{{ LexiqueGetString('this-field-is-required') }}",
+                        maxlength: jQuery.validator.format("{{ LexiqueGetString('this-field-accept-maximum') }}")
+                    },
+                    tb_trans_amount: {
+                        required: "{{ LexiqueGetString('this-field-is-required') }}"
+                    },
+                    ld_trans_doc_type: {
+                        required: "{{ LexiqueGetString('this-field-is-required') }}",
+                        maxlength: jQuery.validator.format("{{ LexiqueGetString('this-field-accept-maximum') }}")
+                    },
+                    tb_trans_doc_num: {
+                        required: "{{ LexiqueGetString('this-field-is-required') }}",
+                        maxlength: jQuery.validator.format("{{ LexiqueGetString('this-field-accept-maximum') }}")
+                    },
+                    tb_trans_doc_place: {
+                        maxlength: jQuery.validator.format("{{ LexiqueGetString('this-field-accept-maximum') }}")
+                    },
+                    tb_trans_doc_date: {
+                        required: "{{ LexiqueGetString('this-field-is-required') }}"
+                    }
+                }
+
+            })
+
+            $('#tb_trans_account').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    $('#btnSearchClient').click();
+                }
+            });
+
+            $('#btnSearchClient').click(function (e) {
+                var partner = $('#LD_trans_partner').val();
+                var numCpt = $('#tb_trans_account').val();
+                if (partner.length > 0 && numCpt.length > 0) {
+                    var l = Ladda.create(this);
+                    l.start();
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path_for('operation.getClient') }}",
+                        data: {
+                            partner: partner,
+                            numCpt: numCpt,
+                            __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                            l.stop();
+                            $('input[name="__RequestVerificationToken"]').val(response.__RequestVerificationToken);
+                            if (response.isSuccess) {
+                                alertify.success(response.message);
+                                $('#account-holder').val(response.data.name);
+                                $('#account-number').val(response.data.numCpt);
+                                $('#opCustomer').prop("disabled", false);
+                                $('#sendWithdraw').prop('disabled', false);
+                            } else {
+                                alertify.error(response.message);
+                                $('#account-holder').val('');
+                                $('#account-number').val('');
+                                $('#opCustomer').prop("disabled", true);
+                                $('#sendWithdraw').prop('disabled', true);
+                            }
+                        },
+                        error: function (jq, status, error) {
+                            l.stop();
+                            alertify.error(error);
+                        }
+                    });
+                } else {
+                    alertify.error("{{ LexiqueGetString('please-enter-the-partner-') }}");
+                }
+
+            });
+        });
+    </script>
+{% endblock scripts %}

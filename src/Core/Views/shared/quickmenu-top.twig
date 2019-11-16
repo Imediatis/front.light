@@ -1,0 +1,71 @@
+<div id="right-sidebar">
+    <div class="sidebar-container">
+
+        <ul class="nav nav-tabs navs-2">
+            <li class="">
+                <a data-toggle="tab" href="#tab-1">
+                    Notes
+                </a>
+            </li>
+            <li class="active">
+                <a data-toggle="tab" href="#tab-2">
+                    Actions
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane" id="tab-1">
+                <div class="sidebar-title">
+                    <h3>
+                        <i class="fa fa-comments-o"></i>
+                        Latest Notes</h3>
+                    <small>
+                        <i class="fa fa-tim"></i>
+                        You have 10 new message.</small>
+                </div>
+                <div>
+                    <div class="sidebar-message">
+                        <a href="#">
+                            <div class="pull-left text-center">
+                                <img alt="image" class="img-circle message-avatar" src="{{base_url()}}/img/avatars/user.svg">
+                                <div class="m-t-xs">
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                </div>
+                            </div>
+                            <div class="media-body">
+                                There are many variations of passages of Lorem Ipsum available.
+                                <br>
+                                <small class="text-muted">Today 4:21 pm</small>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="tab-pane active" id="tab-2">
+                <div class="sidebar-title">
+                    <h3>
+                        <i class="fa fa-gears m-r-sm"></i>Agences-Caisses</h3>
+                </div>
+                <div class="sidebar-content">
+                    <div class="setings-item">
+                        <a class="btn btn-{{User.boxIsOpened ? 'danger':'primary'}} btn-bitbucket btn-sm" href="{{path_for( 'operation.opencloseBox')}}">
+                            {{LexiqueGetString( User.boxIsOpened ? 'close-box': 'open-box')}}<i class="m-l-sm fa fa-toggle-{{ User.boxIsOpened ? 'on': 'off'}}"></i>
+                        </a>
+                    </div>
+                    <div class="setings-item">
+                        <a class="btn btn-{{User.branchIsOpened ? 'danger':'primary'}} btn-bitbucket btn-sm" href="{{path_for( 'operation.opencloseBranch')}}">
+                            {{LexiqueGetString( User.branchIsOpened ? 'close-branch': 'open-branch')}}<i class="m-l-sm fa fa-toggle-{{ User.branchIsOpened ? 'on':'off' }}"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

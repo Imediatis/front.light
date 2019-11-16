@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resellers>
+  <dealer ref="frontoffice" name="LIGHT+" folder="Core" uri="front.light.local" logo="cism.png" keyof="light" 
+          css="cism.master.css;cism.custom.css" bg="cism.jpg" icon="favicon.ico" 
+          dbhost="" dbuser="" dbpwd="" dbname="" dbport=""
+          rCapPublic="" rCapSecret=""
+          apiUrl="http://www.api.light.local/" clientName="front-light"
+          authUrl="http://www.auth.light.local/" 
+          apiUsername="AdsystSecure+" 
+          apiPwd="It's 1U2er*ad2Yst-Secure+2019"
+          authUsername ="AdsystSecure+Auth"
+          authPwd="It's 1U2er*ad2Yst!Auth-Secure+2019"
+          apiToken="c3lsdmluQGdhbWlsLmNvbcKyQ2xlRGVTZWN1cml0ZQ"/>
+</resellers>

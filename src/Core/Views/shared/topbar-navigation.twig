@@ -1,0 +1,33 @@
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                <i class="fa fa-bars"></i>
+            </a>
+            <form action="" class="navbar-form-custom" role="search">
+                <div class="form-group">
+                    <input class="form-control" disabled id="top-search" name="top-search" placeholder="" type="text">
+                </div>
+            </form>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li>
+                <span class="m-r-sm text-muted welcome-message">{{LexiqueGetString('welcome-to')}}
+                    {{appEnv.appName}}</span>
+            </li>
+            <li>
+                <form action="{{path_for('logout')}}" method="POST">
+                    {{ getCsrfInput() }}
+                    <button class="btn btn-link" style="padding-top:0;" type="submit">
+                        <i class="fa fa-sign-out"></i>
+                        {{LexiqueGetString('log-out')}}</button>
+                </form>
+            </li>
+            <li>
+                <a class="right-sidebar-toggle" data-placement="bottom" data-toggle="tooltip" title="Actions sur la caisse">
+                    <i class="fa fa-gears"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
