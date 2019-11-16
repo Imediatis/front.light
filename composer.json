@@ -1,6 +1,6 @@
 {
     "name": "imediatis/front.light",
-    "description": "Projet de base MVC pour PHP",
+    "description": "Application client pour le service light",
     "type": "project",
     "authors": [{
         "name": "Sylvin KAMDEM",
